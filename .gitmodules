@@ -1,0 +1,3 @@
+[submodule "element/dynamichtml"]
+	path = element/dynamichtml
+	url = https://bitbucket.org/costrack/moodle-certificateelement_dynamichtml.git
