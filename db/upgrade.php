@@ -251,7 +251,7 @@ function xmldb_tool_certificate_upgrade($oldversion) {
         $table = new xmldb_table('tool_certificate_issues');
         $field = new xmldb_field('name', XMLDB_TYPE_CHAR, '255');
 
-        // Conditionally add field name to tool_certificate_issues
+        // Conditionally add field name to tool_certificate_issues.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
