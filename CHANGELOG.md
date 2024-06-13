@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.4.1 - 2024-06-11
+### Fixed
+- fixed implicit nullable parameter declaration deprecated in PHP 8.4
+  (new coding style check)
+
 ## 4.4 - 2024-05-21
 ### Added
 - Add cohort entity to issued certificates datasource

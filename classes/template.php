@@ -589,7 +589,7 @@ class template {
      * @param \context|null $context
      * @return bool
      */
-    public function can_issue_to_anybody(\context $context = null): bool {
+    public function can_issue_to_anybody(?\context $context = null): bool {
         return $this->get_id() && permission::can_issue_to_anybody($context ?? $this->get_context());
     }
 
@@ -600,7 +600,7 @@ class template {
      * @param \context|null $context
      * @return bool
      */
-    public function can_issue(int $issuetouserid, \context $context = null): bool {
+    public function can_issue(int $issuetouserid, ?\context $context = null): bool {
         return $this->can_issue_to_anybody($context) && !permission::is_user_hidden_by_tenancy($issuetouserid);
     }
 
@@ -611,7 +611,7 @@ class template {
      * @param \context|null $context
      * @return bool
      */
-    public function can_revoke(int $userid, \context $context = null): bool {
+    public function can_revoke(int $userid, ?\context $context = null): bool {
         return $this->can_issue($userid, $context);
     }
 
@@ -621,7 +621,7 @@ class template {
      * @param \context|null $issuecontext
      * @return bool
      */
-    public function can_view_issues(\context $issuecontext = null) {
+    public function can_view_issues(?\context $issuecontext = null) {
         // The context is not always matching template context, e.g. when template is used in the course module.
         return permission::can_view_templates_in_context($issuecontext ?? $this->get_context());
     }
