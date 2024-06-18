@@ -124,6 +124,7 @@ class issues extends \external_api {
             $issuedata = @json_decode($issue->data, true);
             $issuedata['userfullname'] = fullname($user);
             $issue->data = json_encode($issuedata);
+            $issue->timegenerated = time();
             $DB->update_record('tool_certificate_issues', $issue);
         }
 
