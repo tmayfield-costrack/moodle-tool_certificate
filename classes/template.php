@@ -694,10 +694,11 @@ class template {
      * @param int|null $courseid
      * @param string $name Override the name for a certificate to display in the user's list
      * @param \core\lock\lock|null $lock optional lock to release after a record was inserted into the DB
+     * @param ?int $timecreated Override the timecreated on the issued certificate
      * @return int The ID of the issue
      */
     public function issue_certificate($userid, $expires = null, array $data = [], $component = 'tool_certificate',
-            $courseid = null, $name = null, ?\core\lock\lock $lock = null) {
+            $courseid = null, $name = null, ?\core\lock\lock $lock = null, $timecreated = null) {
         global $DB;
 
         component_class_callback(\tool_tenant\config::class, 'push_for_user', [$userid]);
@@ -707,7 +708,7 @@ class template {
         $issue->templateid = $this->get_id();
         $issue->code = \tool_certificate\certificate::generate_code($issue->userid);
         $issue->emailed = 0;
-        $issue->timecreated = time();
+        $issue->timecreated = $timecreated ?? time();
         $issue->timegenerated = time();
         $issue->expires = $expires;
         $issue->component = $component;
