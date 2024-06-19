@@ -210,7 +210,7 @@ class issue extends base {
             ->add_joins($this->get_joins());
         // Filter issue time generated.
         $filters[] = (new filter(
-            date::class,
+            \core_reportbuilder\local\filters\datetime::class,
             'timegenerated',
             new lang_string('regenerateddate', 'tool_certificate'),
             $this->get_entity_name(),
