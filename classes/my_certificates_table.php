@@ -83,6 +83,10 @@ class my_certificates_table extends \table_sql {
             get_string('issueddate', 'tool_certificate'),
             get_string('expirydate', 'tool_certificate'),
         ];
+        if (has_capability('moodle/site:config', \context_system::instance())) {
+            $columns[] = 'timegenerated';
+            $headers[] = get_string('regenerateddate', 'tool_certificate');
+        }
 
         if (permission::can_verify()) {
             $columns[] = 'code';
@@ -144,6 +148,16 @@ class my_certificates_table extends \table_sql {
      */
     public function col_timecreated($certificate) {
         return userdate($certificate->timecreated);
+    }
+
+    /**
+     * Generate the certificate time created column.
+     *
+     * @param \stdClass $certificate
+     * @return string
+     */
+    public function col_timegenerated($certificate) {
+        return userdate($certificate->timegenerated);
     }
 
     /**
