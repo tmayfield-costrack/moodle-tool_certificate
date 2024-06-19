@@ -119,6 +119,7 @@ $string['invalidwidth'] = 'The width has to be a valid number greater than 0.';
 $string['issuecertificates'] = 'Issue certificates';
 $string['issuedcertificates'] = 'Issued certificates';
 $string['issueddate'] = 'Date issued';
+$string['regenerateddate'] = 'Date (re-)generated';
 $string['issuelang'] = 'Issue certificates in user language';
 $string['issuelangdesc'] = 'On multi-lingual sites when user language is different from the site language the certificates will be generated in the user\'s language, otherwise all certificates will be generated in the site default language.';
 $string['issuename'] = 'Name (issued)';

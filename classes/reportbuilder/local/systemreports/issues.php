@@ -156,6 +156,7 @@ class issues extends system_report {
             'issue:status',
             'issue:expires',
             'issue:timecreated',
+            'issue:timegenerated',
         ];
         $this->add_columns_from_entities($columns);
 
@@ -186,6 +187,7 @@ class issues extends system_report {
             'issue:status',
             'issue:expires',
             'issue:timecreated',
+            'issue:timegenerated',
             'issue:archived',
         ];
 

@@ -140,6 +140,17 @@ class issue extends base {
             ->set_is_sortable(true)
             ->add_field("{$certificateissuealias}.timecreated")
             ->add_callback([format::class, 'userdate']);
+        // Column certificate issue timegenerated.
+        $columns[] = (new column(
+            'timegenerated',
+            new lang_string('regenerateddate', 'tool_certificate'),
+            $this->get_entity_name()
+        ))
+            ->add_joins($this->get_joins())
+            ->set_type(column::TYPE_TIMESTAMP)
+            ->set_is_sortable(true)
+            ->add_field("{$certificateissuealias}.timegenerated")
+            ->add_callback([format::class, 'userdate']);
 
         // Column certificate expires.
         $columns[] = (new column(
@@ -195,6 +206,15 @@ class issue extends base {
             new lang_string('timecreated', 'tool_certificate'),
             $this->get_entity_name(),
             "{$certificateissuealias}.timecreated"
+        ))
+            ->add_joins($this->get_joins());
+        // Filter issue time generated.
+        $filters[] = (new filter(
+            date::class,
+            'timegenerated',
+            new lang_string('regenerateddate', 'tool_certificate'),
+            $this->get_entity_name(),
+            "{$certificateissuealias}.timegenerated"
         ))
             ->add_joins($this->get_joins());
 
