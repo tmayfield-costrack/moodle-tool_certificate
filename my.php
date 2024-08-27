@@ -60,7 +60,8 @@ $PAGE->navbar->add(get_string('profile'), new moodle_url('/user/profile.php', ['
 $PAGE->navbar->add(get_string('mycertificates', 'tool_certificate'));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('mycertificates', 'tool_certificate'));
+
+echo $OUTPUT->heading(local_genealogy\common_functions::createQuickLinksHeader(get_string('mycertificates', 'tool_certificate')));
 echo html_writer::div(get_string('mycertificatesdescription', 'tool_certificate'));
 $table->out($perpage, false);
 echo $OUTPUT->footer();
