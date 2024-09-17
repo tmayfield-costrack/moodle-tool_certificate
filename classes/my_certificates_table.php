@@ -109,12 +109,16 @@ class my_certificates_table extends \table_sql {
             $this->no_sorting('linkedin');
         }
 
+        $columns[] = 'certificate';
+        $headers[] = 'Certificate';
+
         $this->define_columns($columns);
         $this->define_headers($headers);
         $this->collapsible(false);
         $this->sortable(true);
         $this->no_sorting('code');
         $this->no_sorting('download');
+        $this->no_sorting('certificate');
         $this->is_downloadable(true);
     }
 
@@ -201,6 +205,37 @@ class my_certificates_table extends \table_sql {
         $link = template::view_url($issue->code);
 
         return $OUTPUT->action_link($link, '', null, ['target' => '_blank'], $icon);
+    }
+
+    /**
+     * Generate the certificate column.
+     *
+     * @param \stdClass $certificate
+     * @return string
+     */
+    public function col_certificate($certificate) {
+
+        $html =  \html_writer::start_tag('form', [
+            'action' => '', // Submit to the same page
+            'method' => 'post'
+        ]);
+
+        $html .= \html_writer::empty_tag('input', [
+            'type' => 'hidden',
+            'name' => 'packageid',
+            'value' => $certificate->packageid
+        ]);
+
+        $html .= \html_writer::empty_tag('input', [
+            'type' => 'submit',
+            'value' => 'Order print/replacement certificate',
+            'class' => 'btn btn-primary'
+        ]);
+
+        $html .= \html_writer::end_tag('form');
+
+        return $html;
+
     }
 
     /**

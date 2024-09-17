@@ -34,12 +34,32 @@ $pageurl = $url = new moodle_url('/admin/tool/certificate/my.php', ['userid' => 
 // Requires a login.
 require_login();
 
+
 // Check that we have a valid user.
 $user = \core_user::get_user($userid ?: $USER->id, '*', MUST_EXIST);
 if (!\tool_certificate\permission::can_view_list($user->id)) {
     throw new \required_capability_exception(context_system::instance(), 'tool/certificate:viewallcertificates',
         'nopermission', 'error');
 }
+
+// Print replacement certificate
+if($_SERVER['REQUEST_METHOD'] === 'POST' )
+{
+    $packageid = required_param('packageid', PARAM_INT);
+
+    $package = \enrol_package\package::get($packageid);
+    $package->load_user_display_tree($user->id);
+    $package->check_certificates();
+
+    $cart = \enrol_genealogy\genealogy_cart::get_user_cart();
+    if ($package->add_certificate_to_cart($cart))
+    {
+        redirect(new moodle_url('/enrol/genealogy/shoppingcart.php'));
+        die();
+    }
+}
+
+
 
 $table = new \tool_certificate\my_certificates_table($user->id, $download);
 $table->define_baseurl($pageurl);

@@ -317,7 +317,8 @@ class certificate {
         }
 
         $sql = "SELECT ci.id, ci.expires, ci.code, ci.timecreated, ci.timegenerated, ci.userid, ci.courseid,
-                       t.id as templateid, t.contextid, COALESCE(ci.name, t.name) AS name
+                       t.id as templateid, t.contextid, COALESCE(ci.name, t.name) AS name,
+                       JSON_VALUE(ci.data, '$.packageid') AS packageid 
                   FROM {tool_certificate_templates} t
             INNER JOIN {tool_certificate_issues} ci
                     ON t.id = ci.templateid
