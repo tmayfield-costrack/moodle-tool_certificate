@@ -99,6 +99,7 @@ class certificate {
         return get_string($status, 'tool_certificate');
     }
 
+
     /**
      * Format the expires column.
      *

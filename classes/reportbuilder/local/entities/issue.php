@@ -45,7 +45,9 @@ class issue extends base {
      * @return array
      */
     protected function get_default_table_aliases(): array {
-        return ['tool_certificate_issues' => 'tci'];
+        return [
+            'tool_certificate_issues' => 'tci'
+        ];
     }
 
     /**
@@ -164,6 +166,7 @@ class issue extends base {
             ->add_field("{$certificateissuealias}.expires")
             ->add_callback([formatter::class, 'certificate_issued_expires']);
 
+
         // Column status.
         $columns[] = (new column(
             'status',
@@ -174,6 +177,7 @@ class issue extends base {
             ->set_is_sortable(true)
             ->add_field("{$certificateissuealias}.expires")
             ->add_callback([formatter::class, 'certificate_issued_status']);
+
 
         return $columns;
     }
@@ -187,6 +191,16 @@ class issue extends base {
         $filters = [];
 
         $certificateissuealias = $this->get_table_alias('tool_certificate_issues');
+
+        // Filter name (issued).
+        $filters[] = (new filter(
+            \core_reportbuilder\local\filters\text::class,
+            'name',
+            new lang_string('issuename', 'tool_certificate'),
+            $this->get_entity_name(),
+            "{$certificateissuealias}.name"
+        ))
+            ->add_joins($this->get_joins());
 
         // Filter issue status.
         $filters[] = (new filter(

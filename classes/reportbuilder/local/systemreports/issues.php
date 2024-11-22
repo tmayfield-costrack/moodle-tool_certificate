@@ -153,6 +153,7 @@ class issues extends system_report {
         }
 
         $columns = [
+            'issue:name',
             'issue:status',
             'issue:expires',
             'issue:timecreated',
@@ -184,6 +185,7 @@ class issues extends system_report {
         }
 
         $filters = [
+            'issue:name',
             'issue:status',
             'issue:expires',
             'issue:timecreated',
