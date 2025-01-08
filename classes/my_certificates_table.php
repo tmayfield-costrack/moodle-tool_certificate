@@ -76,12 +76,12 @@ class my_certificates_table extends \table_sql {
         $columns = [
             'name',
             'timecreated',
-            'expires',
+            //'expires',
         ];
         $headers = [
             get_string('name'),
             get_string('issueddate', 'tool_certificate'),
-            get_string('expirydate', 'tool_certificate'),
+            //get_string('expirydate', 'tool_certificate'),
         ];
         if (has_capability('moodle/site:config', \context_system::instance())) {
             $columns[] = 'timegenerated';
